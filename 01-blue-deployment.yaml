@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: nginx-blue
+  # this are replicaset labels
+  labels:
+    purpose: blue-green
+    project: roboshop
+    color: blue
+
+spec:
+  replicas: 4
+  selector:
+  # this labels are used to select the pods
+    matchLabels:
+       purpose: blue-green
+       project: roboshop
+       color: blue
+  # pod defination
+  template:
+    metadata:
+      labels:
+        purpose: blue-green
+        project: roboshop
+        color: blue
+
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
